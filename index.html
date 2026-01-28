@@ -1,155 +1,193 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Tên của bạn</title>
-    <style>
-        body {
-            margin:0;
-            font-family: Arial, sans-serif;
-            background:#f5f5f5;
-            color:#333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Nguyễn Mạnh Hoài Bảo</title>
 
-        header {
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            padding: 20px 50px;
-            background:white;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-            position:sticky;
-            top:0;
-            z-index:10;
-        }
+<style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif;}
+    body{background:#f7f7f7;color:#333;line-height:1.6;}
 
-        header a {
-            margin-left:20px;
-            text-decoration:none;
-            color:#333;
-            font-weight:bold;
-        }
+    header{
+        background:white;
+        padding:18px 60px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        box-shadow:0 2px 15px rgba(0,0,0,0.08);
+        position:sticky;
+        top:0;
+        z-index:10;
+    }
 
-        header a:hover {
-            color:#007bff;
-        }
+    header .logo{font-size:22px;font-weight:700;}
+    header a{margin-left:22px;text-decoration:none;color:#333;font-weight:500;}
+    header a:hover{color:#007bff;}
 
-        .hero {
-            height:80vh;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            background:white;
-        }
+    .hero{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:40px;
+        padding:80px 20px;
+        background:white;
+        flex-wrap:wrap;
+        text-align:left;
+    }
 
-        .hero h1 {
-            font-size:48px;
-            margin:0;
-        }
+    .hero img{
+        width:220px;
+        height:220px;
+        border-radius:12px;
+        object-fit:cover;
+        box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
 
-        .hero p {
-            font-size:18px;
-            opacity:0.7;
-        }
+    .hero h1{font-size:36px;margin-bottom:8px;font-weight:700;}
+    .hero p{opacity:0.8;font-size:18px;}
 
-        .section {
-            padding:60px 50px;
-        }
+    .section{padding:70px 60px;}
+    .section h2{font-size:30px;margin-bottom:30px;font-weight:700;}
 
-        .section h2 {
-            margin-bottom:20px;
-            font-size:32px;
-        }
+    /* PROJECTS */
+    .projects{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+        gap:25px;
+    }
 
-        .projects {
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:20px;
-        }
+    .card{
+        background:white;
+        padding:20px;
+        border-radius:10px;
+        box-shadow:0 2px 12px rgba(0,0,0,0.1);
+        transition:0.2s;
+    }
+    .card:hover{transform:translateY(-5px);}
 
-        .project-card {
-            background:white;
-            padding:20px;
-            border-radius:8px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-        }
+    .card img{
+        width:100%;
+        height:170px;
+        border-radius:8px;
+        object-fit:cover;
+        margin-bottom:10px;
+    }
 
-        .contact p {
-            font-size:18px;
-            margin:8px 0;
-        }
+    .badge{
+        display:inline-block;
+        background:#007bff;
+        color:white;
+        padding:3px 8px;
+        border-radius:5px;
+        font-size:13px;
+        margin-right:5px;
+        margin-top:6px;
+    }
 
-        footer {
-            text-align:center;
-            padding:20px;
-            background:#eee;
-            margin-top:40px;
-        }
+    .skills-list{
+        display:flex;
+        flex-wrap:wrap;
+        gap:12px;
+    }
+    .skill{
+        padding:10px 16px;
+        background:white;
+        border-radius:8px;
+        box-shadow:0 2px 8px rgba(0,0,0,0.08);
+        font-weight:500;
+    }
 
-        /* Responsive */
-        @media(max-width:600px){
-            header { padding:15px 20px; }
-            .hero h1 { font-size:32px; }
-        }
-    </style>
+    footer{
+        padding:25px;
+        text-align:center;
+        background:#e7e7e7;
+        margin-top:40px;
+        font-size:15px;
+    }
+
+    @media(max-width:600px){
+        header{padding:15px 20px;}
+        .section{padding:40px 20px;}
+        .hero{text-align:center;}
+    }
+</style>
 </head>
 <body>
 
 <header>
-    <strong>Tên của bạn</strong>
+    <div class="logo">Hoài Bảo</div>
     <nav>
-        <a href="#about">Giới thiệu</a>
         <a href="#projects">Dự án</a>
+        <a href="#skills">Kỹ năng</a>
         <a href="#contact">Liên hệ</a>
     </nav>
 </header>
 
 <section class="hero">
-    <h1>Chào! Mình là Tên của bạn 👋</h1>
-    <p>Web Developer / Game Developer / Designer</p>
-</section>
-
-<section class="section" id="about">
-    <h2>Giới thiệu</h2>
-    <p>Mình là lập trình viên đam mê làm game Unity & lập trình web. Gần đây mình đang làm việc với Unity 2D, JSON Save System, và Entity Framework.</p>
-</section>
-
-<section class="section" id="projects">
-    <h2>Dự án</h2>
-
-    <div class="projects">
-        <div class="project-card">
-            <h3>Tên dự án 1</h3>
-            <p>Mô tả ngắn về dự án...</p>
-            <a href="#">Xem dự án</a>
-        </div>
-
-        <div class="project-card">
-            <h3>Tên dự án 2</h3>
-            <p>Mô tả ngắn về dự án...</p>
-            <a href="#">Xem dự án</a>
-        </div>
-
-        <div class="project-card">
-            <h3>Tên dự án 3</h3>
-            <p>Mô tả ngắn về dự án...</p>
-            <a href="#">Xem dự án</a>
-        </div>
+    <img src="avatar.jpg" alt="Ảnh chân dung">
+    <div>
+        <h1>Nguyễn Mạnh Hoài Bảo</h1>
+        <p>Sinh viên ngành Công Nghệ Thông Tin • Game Developer</p>
     </div>
 </section>
 
-<section class="section contact" id="contact">
+<section class="section" id="projects">
+    <h2>Dự án tiêu biểu</h2>
+
+    <div class="projects">
+
+        <!-- Project 1 -->
+        <div class="card">
+            <img src="project1.jpg" alt="">
+            <h3>Dự án Game Platformer</h3>
+            <p><strong>Năm:</strong> 2024</p>
+            <p><strong>Công cụ:</strong></p>
+            <span class="badge">Unity</span>
+            <span class="badge">C#</span>
+            <span class="badge">ChatGPT</span>
+            <br><br>
+            <a href="https://github.com/your-repo" target="_blank">🔗 Link dự án</a>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="card">
+            <img src="project2.jpg" alt="">
+            <h3>Dự án Web Portfolio</h3>
+            <p><strong>Năm:</strong> 2025</p>
+            <p><strong>Công cụ:</strong></p>
+            <span class="badge">HTML/CSS</span>
+            <span class="badge">JavaScript</span>
+            <span class="badge">ChatGPT</span>
+            <br><br>
+            <a href="https://your-website.github.io" target="_blank">🔗 Link dự án</a>
+        </div>
+
+    </div>
+</section>
+
+<section class="section" id="skills">
+    <h2>Kỹ năng chuyên ngành</h2>
+    <div class="skills-list">
+        <div class="skill">Unity 2D / 3D</div>
+        <div class="skill">C#</div>
+        <div class="skill">Entity Framework</div>
+        <div class="skill">JSON Save System</div>
+        <div class="skill">Git / GitHub</div>
+        <div class="skill">Web HTML / CSS</div>
+        <div class="skill">Communication</div>
+    </div>
+</section>
+
+<section class="section" id="contact">
     <h2>Liên hệ</h2>
-    <p>Email: yourmail@example.com</p>
-    <p>Facebook: fb.com/yourprofile</p>
-    <p>Github: github.com/yourprofile</p>
+    <p>Email: <strong>yourmail@gmail.com</strong></p>
+    <p>Facebook: <strong>fb.com/yourprofile</strong></p>
+    <p>GitHub: <strong>github.com/yourprofile</strong></p>
 </section>
 
 <footer>
-    © 2026 - Tên của bạn
+    © 2026 - Nguyễn Mạnh Hoài Bảo
 </footer>
 
 </body>
