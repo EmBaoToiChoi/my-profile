@@ -5,118 +5,274 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portfolio - Nguyễn Mạnh Hoài Bảo</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-    *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',sans-serif;}
-    body{background:#f7f7f7;color:#333;line-height:1.6;}
-
-    header{
-        background:white;
-        padding:18px 60px;
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        box-shadow:0 2px 15px rgba(0,0,0,0.08);
-        position:sticky;
-        top:0;
-        z-index:10;
+    /* --- CÀI ĐẶT CHUNG (VARIABLES) --- */
+    :root {
+        --bg-color: #0f1014;       /* Màu nền đen xám đậm */
+        --card-bg: #1b1e26;        /* Màu nền card */
+        --primary: #6c5ce7;        /* Tím chủ đạo */
+        --accent: #00cec9;         /* Xanh ngọc điểm nhấn */
+        --text-main: #ffffff;
+        --text-muted: #a0a0a0;
+        --gradient: linear-gradient(135deg, #00cec9 0%, #6c5ce7 100%);
     }
 
-    header .logo{font-size:22px;font-weight:700;}
-    header a{margin-left:22px;text-decoration:none;color:#333;font-weight:500;}
-    header a:hover{color:#007bff;}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    .hero{
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        gap:40px;
-        padding:80px 20px;
-        background:white;
-        flex-wrap:wrap;
-        text-align:left;
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: 'Outfit', sans-serif; /* Font chữ hiện đại */
+        line-height: 1.6;
+        overflow-x: hidden;
     }
 
-    .hero img{
-        width:220px;
-        height:220px;
-        border-radius:12px;
-        object-fit:cover;
-        box-shadow:0 0 15px rgba(0,0,0,0.1);
+    /* --- HEADER (GLASSMORPHISM) --- */
+    header {
+        background: rgba(15, 16, 20, 0.85); /* Trong suốt */
+        backdrop-filter: blur(12px);        /* Hiệu ứng mờ kính */
+        padding: 15px 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
 
-    .hero h1{font-size:36px;margin-bottom:8px;font-weight:700;}
-    .hero p{opacity:0.8;font-size:18px;}
-
-    .section{padding:70px 60px;}
-    .section h2{font-size:30px;margin-bottom:30px;font-weight:700;}
-
-    /* PROJECTS */
-    .projects{
-        display:grid;
-        grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-        gap:25px;
+    header .logo {
+        font-size: 24px;
+        font-weight: 700;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent; /* Chữ màu gradient */
+        letter-spacing: -0.5px;
     }
 
-    .card{
-        background:white;
-        padding:20px;
-        border-radius:10px;
-        box-shadow:0 2px 12px rgba(0,0,0,0.1);
-        transition:0.2s;
-    }
-    .card:hover{transform:translateY(-5px);}
-
-    .card img{
-        width:100%;
-        height:170px;
-        border-radius:8px;
-        object-fit:cover;
-        margin-bottom:10px;
+    header nav a {
+        margin-left: 30px;
+        text-decoration: none;
+        color: var(--text-muted);
+        font-weight: 500;
+        transition: 0.3s;
+        font-size: 15px;
     }
 
-    .badge{
-        display:inline-block;
-        background:#007bff;
-        color:white;
-        padding:3px 8px;
-        border-radius:5px;
-        font-size:13px;
-        margin-right:5px;
-        margin-top:6px;
+    header nav a:hover {
+        color: var(--accent);
     }
 
-    .skills-list{
-        display:flex;
-        flex-wrap:wrap;
-        gap:12px;
-    }
-    .skill{
-        padding:10px 16px;
-        background:white;
-        border-radius:8px;
-        box-shadow:0 2px 8px rgba(0,0,0,0.08);
-        font-weight:500;
-    }
-
-    footer{
-        padding:25px;
-        text-align:center;
-        background:#e7e7e7;
-        margin-top:40px;
-        font-size:15px;
+    /* --- HERO SECTION --- */
+    .hero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+        padding: 100px 20px;
+        min-height: 80vh;
+        flex-wrap: wrap;
+        position: relative;
     }
 
-    @media(max-width:600px){
-        header{padding:15px 20px;}
-        .section{padding:40px 20px;}
-        .hero{text-align:center;}
+    /* Hiệu ứng đốm sáng nền (Glow background) */
+    .hero::before {
+        content: '';
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: var(--primary);
+        filter: blur(150px);
+        opacity: 0.2;
+        z-index: -1;
+        top: 20%;
+        left: 20%;
+    }
+
+    .hero img {
+        width: 250px;
+        height: 250px;
+        border-radius: 20px; /* Bo góc mềm mại hơn */
+        object-fit: cover;
+        border: 2px solid rgba(255,255,255,0.1);
+        box-shadow: 0 0 30px rgba(108, 92, 231, 0.3);
+        transition: transform 0.5s;
+    }
+    
+    .hero img:hover {
+        transform: scale(1.02) rotate(-2deg);
+    }
+
+    .hero-content {
+        max-width: 600px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+        margin-bottom: 15px;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+    
+    .hero h1 span {
+        color: var(--primary);
+    }
+
+    .hero p {
+        color: var(--text-muted);
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+    /* --- SECTION CHUNG --- */
+    .section { padding: 80px 10%; }
+    
+    .section h2 {
+        font-size: 32px;
+        margin-bottom: 40px;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .section h2::after {
+        content: '';
+        position: absolute;
+        width: 40%;
+        height: 4px;
+        background: var(--gradient);
+        bottom: -10px;
+        left: 0;
+        border-radius: 2px;
+    }
+
+    /* --- PROJECTS GRID --- */
+    .projects {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+    }
+
+    .card {
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.05);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        border-color: var(--primary);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    }
+
+    .card img {
+        width: 100%;
+        height: 180px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-bottom: 20px;
+        filter: brightness(0.9);
+        transition: 0.3s;
+    }
+
+    .card:hover img { filter: brightness(1.1); }
+
+    .card h3 { margin-bottom: 10px; font-size: 20px; }
+
+    .card p {
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    /* Badge phong cách Tech */
+    .badge {
+        display: inline-block;
+        background: rgba(108, 92, 231, 0.15); /* Nền trong suốt màu tím */
+        color: #a29bfe;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        margin-right: 6px;
+        margin-top: 5px;
+        border: 1px solid rgba(108, 92, 231, 0.3);
+    }
+
+    .project-link {
+        display: inline-block;
+        margin-top: 15px;
+        text-decoration: none;
+        color: var(--text-main);
+        font-weight: 600;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 2px;
+        transition: 0.3s;
+    }
+    
+    .project-link:hover { color: var(--accent); }
+
+    /* --- SKILLS --- */
+    .skills-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .skill {
+        padding: 12px 24px;
+        background: var(--card-bg);
+        border-radius: 50px;
+        border: 1px solid rgba(255,255,255,0.1);
+        font-weight: 500;
+        color: var(--text-muted);
+        transition: 0.3s;
+        cursor: default;
+    }
+
+    .skill:hover {
+        background: var(--gradient);
+        color: white;
+        border-color: transparent;
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+    }
+
+    /* --- CONTACT & FOOTER --- */
+    .contact-info p {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: var(--text-muted);
+    }
+    
+    .contact-info strong { color: var(--text-main); }
+
+    footer {
+        padding: 40px;
+        text-align: center;
+        background: #050505;
+        border-top: 1px solid rgba(255,255,255,0.05);
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 768px) {
+        .hero { flex-direction: column; text-align: center; gap: 30px; }
+        .hero h1 { font-size: 36px; }
+        header { padding: 15px 20px; }
+        .section { padding: 60px 20px; }
     }
 </style>
 </head>
 <body>
 
 <header>
-    <div class="logo">Hoài Bảo</div>
+    <div class="logo">Hoài Bảo.Dev</div>
     <nav>
         <a href="#projects">Dự án</a>
         <a href="#skills">Kỹ năng</a>
@@ -126,9 +282,9 @@
 
 <section class="hero">
     <img src="avatar.jpg" alt="Ảnh chân dung">
-    <div>
-        <h1>Nguyễn Mạnh Hoài Bảo</h1>
-        <p>Sinh viên ngành Công Nghệ Thông Tin • Game Developer</p>
+    <div class="hero-content">
+        <h1>Xin chào, mình là <br><span>Nguyễn Mạnh Hoài Bảo</span></h1>
+        <p>Game Developer & IT Student</p>
     </div>
 </section>
 
@@ -137,49 +293,49 @@
 
     <div class="projects">
 
-        <!-- Project 1 -->
         <div class="card">
             <img src="project1.jpg" alt="">
             <h3>Dự án Game Platformer</h3>
             <p><strong>Năm:</strong> 2024</p>
-            <p><strong>Công cụ:</strong></p>
-            <span class="badge">Unity</span>
-            <span class="badge">C#</span>
-            <span class="badge">ChatGPT</span>
-            <br><br>
-            <a href="https://github.com/your-repo" target="_blank">🔗 Link dự án</a>
+            <p>Xây dựng game 2D với cơ chế vật lý nâng cao và hệ thống AI quái vật.</p>
+            <div>
+                <span class="badge">Unity</span>
+                <span class="badge">C#</span>
+                <span class="badge">AI Logic</span>
+            </div>
+            <a href="https://github.com/your-repo" target="_blank" class="project-link">Xem trên GitHub →</a>
         </div>
 
-        <!-- Project 2 -->
         <div class="card">
             <img src="project2.jpg" alt="">
-            <h3>Dự án Web Portfolio</h3>
+            <h3>Web Portfolio Cá Nhân</h3>
             <p><strong>Năm:</strong> 2025</p>
-            <p><strong>Công cụ:</strong></p>
-            <span class="badge">HTML/CSS</span>
-            <span class="badge">JavaScript</span>
-            <span class="badge">ChatGPT</span>
-            <br><br>
-            <a href="https://your-website.github.io" target="_blank">🔗 Link dự án</a>
+            <p>Website giới thiệu bản thân với giao diện Dark Mode hiện đại.</p>
+            <div>
+                <span class="badge">HTML5</span>
+                <span class="badge">CSS3</span>
+                <span class="badge">Responsive</span>
+            </div>
+            <a href="https://your-website.github.io" target="_blank" class="project-link">Xem Demo →</a>
         </div>
 
     </div>
 </section>
 
 <section class="section" id="skills">
-    <h2>Kỹ năng chuyên ngành</h2>
+    <h2>Kỹ năng chuyên môn</h2>
     <div class="skills-list">
         <div class="skill">Unity 2D / 3D</div>
-        <div class="skill">C#</div>
+        <div class="skill">C# Scripting</div>
         <div class="skill">Entity Framework</div>
-        <div class="skill">JSON Save System</div>
+        <div class="skill">Game Physics</div>
         <div class="skill">Git / GitHub</div>
-        <div class="skill">Web HTML / CSS</div>
-        <div class="skill">Communication</div>
+        <div class="skill">Web Design</div>
+        <div class="skill">Teamwork</div>
     </div>
 </section>
 
-<section class="section" id="contact">
+<section class="section contact-info" id="contact">
     <h2>Liên hệ</h2>
     <p>Email: <strong>yourmail@gmail.com</strong></p>
     <p>Facebook: <strong>fb.com/yourprofile</strong></p>
@@ -187,7 +343,7 @@
 </section>
 
 <footer>
-    © 2026 - Nguyễn Mạnh Hoài Bảo
+    <p>Designed by <strong>Hoài Bảo</strong> | © 2026 All Rights Reserved.</p>
 </footer>
 
 </body>
