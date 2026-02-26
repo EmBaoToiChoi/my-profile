@@ -12,15 +12,14 @@
     /* --- 1. VARIABLES & RESET --- */
     :root {
         --bg-color: #0b0c10;
-        --card-bg: rgba(31, 40, 51, 0.6); /* Kính mờ */
-        --primary: #66fcf1; /* Xanh Neon sáng */
+        --card-bg: rgba(31, 40, 51, 0.6);
+        --primary: #66fcf1;
         --secondary: #45a29e;
         --accent: #c5c6c7;
         --text-main: #ffffff;
         --text-muted: #a0a3b1;
         --gradient-text: linear-gradient(90deg, #66fcf1, #45a29e);
         --gradient-glow: radial-gradient(circle, rgba(102, 252, 241, 0.15) 0%, rgba(11, 12, 16, 0) 70%);
-        --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
@@ -44,12 +43,11 @@
         z-index: -1;
         animation: rotateBg 20s linear infinite;
     }
-
     @keyframes rotateBg { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
     /* --- 2. HEADER --- */
     header {
-        background: rgba(11, 12, 16, 0.7);
+        background: rgba(11, 12, 16, 0.85); /* Tăng độ tối để dễ đọc */
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         padding: 15px 8%;
@@ -61,7 +59,6 @@
         top: 0;
         z-index: 1000;
         border-bottom: 1px solid rgba(255,255,255,0.05);
-        transition: 0.3s;
     }
 
     header .logo {
@@ -84,17 +81,8 @@
         transition: 0.3s;
     }
 
-    header nav a::after {
-        content: '';
-        position: absolute;
-        width: 0; height: 2px;
-        bottom: -5px; left: 0;
-        background: var(--primary);
-        transition: 0.3s;
-    }
-
     header nav a:hover { color: var(--primary); }
-    header nav a:hover::after { width: 100%; }
+    /* Bỏ gạch chân menu để đỡ rối mắt, tập trung vào tiêu đề chính */
 
     /* --- 3. HERO SECTION --- */
     .hero {
@@ -104,7 +92,7 @@
         justify-content: center;
         padding: 120px 10% 0;
         gap: 50px;
-        flex-wrap: wrap-reverse; /* Đảo ngược trên mobile để ảnh lên trên */
+        flex-wrap: wrap-reverse;
     }
 
     .hero-content { flex: 1; max-width: 600px; }
@@ -135,7 +123,6 @@
         -webkit-text-fill-color: transparent;
     }
 
-    /* Typing effect styling */
     .typing-text {
         font-size: 24px;
         color: var(--text-muted);
@@ -143,7 +130,6 @@
         min-height: 38px;
     }
     .typing-text span { color: var(--text-main); font-weight: 600; border-right: 2px solid var(--primary); padding-right: 5px; animation: blink 0.7s infinite; }
-
     @keyframes blink { 50% { border-color: transparent; } }
 
     .btn-cta {
@@ -160,7 +146,6 @@
         overflow: hidden;
         z-index: 1;
     }
-
     .btn-cta::before {
         content: '';
         position: absolute;
@@ -169,7 +154,6 @@
         z-index: -1;
         transition: 0.3s;
     }
-
     .btn-cta:hover { color: #0b0c10; }
     .btn-cta:hover::before { width: 100%; }
 
@@ -178,8 +162,7 @@
         width: 350px;
         height: 350px;
     }
-
-    .hero-img-box::before { /* Glow effect sau ảnh */
+    .hero-img-box::before {
         content: '';
         position: absolute;
         inset: -20px;
@@ -188,24 +171,20 @@
         z-index: -1;
         filter: blur(20px);
     }
-
     .hero img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Hình dạng organic */
+        width: 100%; height: 100%; object-fit: cover;
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
         border: 3px solid rgba(102, 252, 241, 0.3);
         animation: morph 6s ease-in-out infinite;
         box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
     }
-
     @keyframes morph {
         0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
         50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
         100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
     }
 
-    /* --- 4. SECTIONS & TITLES --- */
+    /* --- 4. SECTIONS & TITLES (ĐÃ SỬA LẠI THANH SLIDER) --- */
     .section { padding: 100px 10%; position: relative; }
     
     .section-title {
@@ -213,206 +192,135 @@
         font-size: 36px;
         margin-bottom: 60px;
         font-family: 'Space Grotesk', sans-serif;
+        position: relative;
+        /* Flex để căn giữa mọi thứ */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
     
-    .section-title span {
-        border-bottom: 3px solid var(--primary);
-        padding-bottom: 10px;
+    /* Đây là "Thanh slider" (gạch chân) bạn yêu cầu nằm chính giữa */
+    .section-title::after {
+        content: '';
+        display: block;
+        width: 80px; /* Độ dài thanh */
+        height: 4px; /* Độ dày thanh */
+        background: var(--primary);
+        margin-top: 15px; /* Khoảng cách với chữ */
+        border-radius: 2px;
+        box-shadow: 0 0 10px var(--primary); /* Hiệu ứng phát sáng */
+        transition: width 0.3s ease;
     }
 
-    /* --- 5. PROJECTS (CARD HOVER) --- */
+    .section-title:hover::after {
+        width: 120px; /* Dài ra khi di chuột vào */
+    }
+
+    .section-title span {
+        color: var(--text-main); /* Màu chữ bình thường */
+        border-bottom: none; /* Xóa gạch chân cũ bị lỗi */
+        padding-bottom: 0;
+    }
+    
+    /* Tô màu chữ đặc biệt trong tiêu đề */
+    .highlight-text {
+        color: var(--primary);
+    }
+
+    /* --- 5. PROJECTS --- */
     .projects {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
     }
-
     .card {
         background: var(--card-bg);
         border: 1px solid rgba(255,255,255,0.05);
         border-radius: 15px;
         overflow: hidden;
         transition: 0.4s;
-        position: relative;
     }
-
     .card:hover {
         transform: translateY(-10px);
         border-color: var(--primary);
         box-shadow: 0 10px 30px rgba(102, 252, 241, 0.15);
     }
-
-    .card-img {
-        width: 100%;
-        height: 200px;
-        overflow: hidden;
-    }
-
-    .card-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: 0.5s;
-    }
-
+    .card-img { width: 100%; height: 200px; overflow: hidden; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
     .card:hover .card-img img { transform: scale(1.1); }
-
     .card-body { padding: 25px; }
-
     .card h3 { font-size: 22px; margin-bottom: 10px; color: var(--text-main); }
     .card-date { font-size: 13px; color: var(--primary); margin-bottom: 10px; display: block; }
     .card p { font-size: 14px; color: var(--text-muted); margin-bottom: 15px; }
-
     .badge-container { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .badge {
-        font-size: 11px;
-        padding: 5px 10px;
-        background: rgba(102, 252, 241, 0.1);
-        color: var(--primary);
-        border-radius: 5px;
-        border: 1px solid rgba(102, 252, 241, 0.2);
+        font-size: 11px; padding: 5px 10px; background: rgba(102, 252, 241, 0.1);
+        color: var(--primary); border-radius: 5px; border: 1px solid rgba(102, 252, 241, 0.2);
     }
-
     .btn-link {
-        text-decoration: none;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        transition: 0.3s;
+        text-decoration: none; color: #fff; font-size: 14px; font-weight: 600;
+        display: inline-flex; align-items: center; gap: 5px; transition: 0.3s;
     }
     .btn-link:hover { color: var(--primary); gap: 8px; }
 
     /* --- 6. SKILLS --- */
     .skills-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        max-width: 800px;
-        margin: 0 auto;
+        display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;
+        max-width: 800px; margin: 0 auto;
     }
-
     .skill-tag {
-        padding: 12px 25px;
-        background: #1f2833;
-        color: var(--text-muted);
-        border-radius: 30px;
-        font-weight: 500;
-        border: 1px solid rgba(255,255,255,0.05);
-        transition: 0.3s;
-        cursor: default;
-        display: flex;
-        align-items: center;
-        gap: 10px;
+        padding: 12px 25px; background: #1f2833; color: var(--text-muted);
+        border-radius: 30px; font-weight: 500; border: 1px solid rgba(255,255,255,0.05);
+        transition: 0.3s; cursor: default; display: flex; align-items: center; gap: 10px;
     }
-
     .skill-tag i { color: var(--primary); }
-
     .skill-tag:hover {
-        background: var(--primary);
-        color: #0b0c10;
-        transform: scale(1.1);
+        background: var(--primary); color: #0b0c10; transform: scale(1.1);
         box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
     }
-    
     .skill-tag:hover i { color: #0b0c10; }
 
     /* --- 7. CONTACT & FOOTER --- */
-    .contact-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-
+    .contact-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
     .contact-card {
-        background: var(--card-bg);
-        padding: 20px 30px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        text-decoration: none;
-        color: var(--text-main);
-        border: 1px solid rgba(255,255,255,0.05);
-        transition: 0.3s;
+        background: var(--card-bg); padding: 20px 30px; border-radius: 10px;
+        display: flex; align-items: center; gap: 15px; text-decoration: none;
+        color: var(--text-main); border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
         min-width: 250px;
     }
-
     .contact-card i { font-size: 24px; color: var(--primary); transition: 0.3s; }
-
-    .contact-card:hover {
-        border-color: var(--primary);
-        transform: translateY(-5px);
-    }
-
+    .contact-card:hover { border-color: var(--primary); transform: translateY(-5px); }
     .contact-card:hover i { transform: scale(1.2); }
-
     footer {
-        text-align: center;
-        padding: 40px;
-        border-top: 1px solid rgba(255,255,255,0.05);
-        font-size: 14px;
-        color: var(--text-muted);
-        background: #050608;
+        text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05);
+        font-size: 14px; color: var(--text-muted); background: #050608;
     }
 
     /* --- 8. BACK TO TOP BUTTON --- */
     #backToTop {
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        width: 50px;
-        height: 50px;
-        background: var(--primary);
-        color: #0b0c10;
-        border-radius: 50%;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+        background: var(--primary); color: #0b0c10; border-radius: 50%; border: none;
+        font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
         box-shadow: 0 5px 15px rgba(102, 252, 241, 0.4);
-        opacity: 0; /* Ẩn mặc định */
-        visibility: hidden;
-        transition: all 0.4s ease;
-        z-index: 999;
-        transform: translateY(20px);
+        opacity: 0; visibility: hidden; transition: all 0.4s ease;
+        z-index: 999; transform: translateY(20px);
     }
+    #backToTop.show { opacity: 1; visibility: visible; transform: translateY(0); }
+    #backToTop:hover { background: #fff; transform: translateY(-5px); }
 
-    #backToTop.show {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-    #backToTop:hover {
-        background: #fff;
-        transform: translateY(-5px);
-    }
-
-    /* --- 9. SCROLL REVEAL ANIMATION CLASS --- */
+    /* --- 9. SCROLL REVEAL --- */
     .reveal {
-        position: relative;
-        transform: translateY(50px);
-        opacity: 0;
-        transition: 1s all ease;
+        position: relative; transform: translateY(50px); opacity: 0; transition: 1s all ease;
     }
-    .reveal.active {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    /* --- 10. RESPONSIVE --- */
+    .reveal.active { transform: translateY(0); opacity: 1; }
+    
+    /* Responsive */
     @media (max-width: 768px) {
         .hero h1 { font-size: 40px; }
         .hero-img-box { width: 280px; height: 280px; margin-bottom: 30px; }
         header { padding: 15px 20px; }
-        header nav { display: none; } /* Có thể thêm menu burger nếu cần */
+        header nav { display: none; }
         .section { padding: 60px 5%; }
     }
 </style>
@@ -444,40 +352,29 @@
     </section>
 
     <section class="section" id="projects">
-        <h2 class="section-title reveal">Dự Án <span>Tiêu Biểu</span></h2>
+        <h2 class="section-title reveal">Dự Án <span class="highlight-text">Tiêu Biểu</span></h2>
 
         <div class="projects reveal">
             <div class="card">
-                <div class="card-img">
-                    <img src="dam.jpg" alt="Game TopDown2D">
-                </div>
+                <div class="card-img"><img src="dam.jpg" alt="Game TopDown2D"></div>
                 <div class="card-body">
                     <span class="card-date">2025</span>
                     <h3>Game TopDown2D (Mẫu)</h3>
-                    <p>Xây dựng core gameplay 2D với cơ chế vũ khí, hệ thống quái vật thông minh và quản lý trạng thái nhân vật.</p>
+                    <p>Xây dựng core gameplay 2D với cơ chế vũ khí và AI logic.</p>
                     <div class="badge-container">
-                        <span class="badge">Unity</span>
-                        <span class="badge">C#</span>
-                        <span class="badge">AI Logic</span>
+                        <span class="badge">Unity</span><span class="badge">C#</span><span class="badge">AI Logic</span>
                     </div>
-                    <a href="https://www.canva.com/design/DAGrLPcGn-8/mepjxQc88b-ysydC5RUW6w/edit" target="_blank" class="btn-link">
-                        Xem Demo <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <a href="https://www.canva.com/design/DAGrLPcGn-8/mepjxQc88b-ysydC5RUW6w/edit" target="_blank" class="btn-link">Xem Demo <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-
             <div class="card">
-                <div class="card-img">
-                    <img src="da1.png" alt="Dự án 1">
-                </div>
+                <div class="card-img"><img src="da1.png" alt="Dự án 1"></div>
                 <div class="card-body">
-                    <span class="card-date">2025 - Hoàn thiện</span>
+                    <span class="card-date">2025</span>
                     <h3>Adventure TopDown RPG</h3>
-                    <p>Game hoàn chỉnh với hệ thống cửa hàng, kho đồ (Inventory), NPC và Boss Fight đa dạng.</p>
+                    <p>Game hoàn chỉnh với hệ thống cửa hàng, NPC và Boss.</p>
                     <div class="badge-container">
-                        <span class="badge">Unity</span>
-                        <span class="badge">GitHub</span>
-                        <span class="badge">G-Sheets DB</span>
+                        <span class="badge">Unity</span><span class="badge">Github</span><span class="badge">G-Sheets DB</span>
                     </div>
                     <div style="display:flex; gap:15px; margin-top:15px;">
                         <a href="https://www.canva.com/design/DAGvrbb8asQ/OFUnz-Imi5emv6_I66VwpA/edit" target="_blank" class="btn-link">Pitch Deck</a>
@@ -489,7 +386,7 @@
     </section>
 
     <section class="section" id="skills">
-        <h2 class="section-title reveal">Kỹ Năng <span>Chuyên Môn</span></h2>
+        <h2 class="section-title reveal">Kỹ Năng <span class="highlight-text">Chuyên Môn</span></h2>
         <div class="skills-wrapper reveal">
             <div class="skill-tag"><i class="fab fa-unity"></i> Unity 2D/3D</div>
             <div class="skill-tag"><i class="fas fa-code"></i> C# Scripting</div>
@@ -498,43 +395,27 @@
             <div class="skill-tag"><i class="fab fa-git-alt"></i> Git / GitHub</div>
             <div class="skill-tag"><i class="fas fa-cubes"></i> Game Physics</div>
             <div class="skill-tag"><i class="fas fa-users"></i> Teamwork</div>
-            <div class="skill-tag"><i class="fas fa-layer-group"></i> UI/UX Design</div>
         </div>
     </section>
 
     <section class="section" id="contact" style="padding-bottom: 50px;">
-        <h2 class="section-title reveal">Liên Hệ <span>Với Tôi</span></h2>
+        <h2 class="section-title reveal">Liên Hệ <span class="highlight-text">Với Tôi</span></h2>
         <div class="contact-container reveal">
             <a href="tel:0379317150" class="contact-card">
                 <i class="fas fa-phone-alt"></i>
-                <div>
-                    <div style="font-size:12px; color:var(--text-muted)">Điện thoại</div>
-                    <div>0379.317.150</div>
-                </div>
+                <div><div style="font-size:12px; color:var(--text-muted)">Điện thoại</div><div>0379.317.150</div></div>
             </a>
-            
             <a href="mailto:hoaibao200611423@gmail.com" class="contact-card">
                 <i class="fas fa-envelope"></i>
-                <div>
-                    <div style="font-size:12px; color:var(--text-muted)">Email</div>
-                    <div>hoaibao...@gmail.com</div>
-                </div>
+                <div><div style="font-size:12px; color:var(--text-muted)">Email</div><div>hoaibao...@gmail.com</div></div>
             </a>
-
             <a href="https://www.facebook.com/nguyenmanhhoaibaocuteee?locale=vi_VN" target="_blank" class="contact-card">
                 <i class="fab fa-facebook-messenger"></i>
-                <div>
-                    <div style="font-size:12px; color:var(--text-muted)">Mạng xã hội</div>
-                    <div>Nhắn tin Facebook</div>
-                </div>
+                <div><div style="font-size:12px; color:var(--text-muted)">Mạng xã hội</div><div>Nhắn tin Facebook</div></div>
             </a>
-
             <a href="https://github.com/EmBaoToiChoi" target="_blank" class="contact-card">
                 <i class="fab fa-github"></i>
-                <div>
-                    <div style="font-size:12px; color:var(--text-muted)">Portfolio Code</div>
-                    <div>Xem GitHub</div>
-                </div>
+                <div><div style="font-size:12px; color:var(--text-muted)">Code</div><div>Xem GitHub</div></div>
             </a>
         </div>
     </section>
@@ -548,69 +429,60 @@
     </button>
 
     <script>
-        // 1. Hiệu ứng đánh máy (Typing Effect)
+        // 1. Typing Effect
         const textElement = document.getElementById('typing');
-        const phrases = ["Game Developer."];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        const phrases = ["Game Developer.", "IT Student.", "Unity Coder."];
+        let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
 
         function type() {
             const currentPhrase = phrases[phraseIndex];
-            
             if (isDeleting) {
-                textElement.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
+                textElement.textContent = currentPhrase.substring(0, charIndex - 1); charIndex--;
             } else {
-                textElement.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
+                textElement.textContent = currentPhrase.substring(0, charIndex + 1); charIndex++;
             }
-
             if (!isDeleting && charIndex === currentPhrase.length) {
-                isDeleting = true;
-                setTimeout(type, 2000); // Đợi 2s trước khi xóa
+                isDeleting = true; setTimeout(type, 2000);
             } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                setTimeout(type, 500);
+                isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; setTimeout(type, 500);
             } else {
                 setTimeout(type, isDeleting ? 50 : 100);
             }
         }
-        document.addEventListener('DOMContentLoaded', type);
 
-        // 2. Hiệu ứng cuộn trang (Scroll Reveal)
-        window.addEventListener('scroll', reveal);
+        // 2. Reveal Function
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
                 var windowheight = window.innerHeight;
                 var revealtop = reveals[i].getBoundingClientRect().top;
                 var revealpoint = 150;
-                if (revealtop < windowheight - revealpoint) {
+                // Fix: Nếu phần tử đã nằm trong màn hình ngay từ đầu thì hiện luôn
+                if (revealtop < windowheight - revealpoint || revealtop < windowheight) {
                     reveals[i].classList.add('active');
                 }
             }
         }
 
-        // 3. Nút Back to Top (Yêu cầu của bạn)
-        const backToTopBtn = document.getElementById("backToTop");
+        // 3. Main Event Listeners
+        window.addEventListener('scroll', reveal);
+        document.addEventListener('DOMContentLoaded', () => {
+            type();
+            reveal(); // GỌI NGAY LẬP TỨC để tránh lỗi nội dung bị ẩn
+        });
 
+        // 4. Back To Top
+        const backToTopBtn = document.getElementById("backToTop");
         window.onscroll = function() {
-            // Hiện nút khi cuộn xuống hơn 300px
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 backToTopBtn.classList.add("show");
             } else {
                 backToTopBtn.classList.remove("show");
             }
-            reveal(); // Gọi hàm reveal khi cuộn
+            reveal();
         };
-
-        backToTopBtn.addEventListener("click", function() {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>
