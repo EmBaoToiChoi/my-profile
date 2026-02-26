@@ -78,7 +78,6 @@
         text-decoration: none;
         color: var(--text-muted);
         font-weight: 500;
-        font-size: 16px;
         position: relative;
         transition: 0.3s;
         text-transform: uppercase;
@@ -88,7 +87,6 @@
 
     header nav a:hover { color: var(--primary); text-shadow: 0 0 8px var(--primary); }
     
-    /* Neon dot under menu */
     header nav a::after {
         content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%);
         width: 0; height: 2px; background: var(--primary); transition: 0.3s;
@@ -96,7 +94,7 @@
     }
     header nav a:hover::after { width: 100%; }
 
-    /* --- 3. HERO SECTION --- */
+    /* --- 3. HERO SECTION (AVATAR CŨ) --- */
     .hero {
         min-height: 100vh;
         display: flex;
@@ -118,7 +116,7 @@
         padding: 6px 18px;
         background: rgba(102, 252, 241, 0.05);
         border: 1px solid var(--primary);
-        border-radius: 4px; /* Góc vuông hơn cho chất Tech */
+        border-radius: 4px;
         box-shadow: 0 0 10px var(--primary-dim);
     }
 
@@ -145,20 +143,13 @@
         min-height: 40px;
         font-family: 'Space Grotesk', sans-serif;
     }
-    .typing-text span { 
-        color: #fff; 
-        text-shadow: 0 0 5px #fff;
-    }
+    .typing-text span { color: #fff; text-shadow: 0 0 5px #fff; }
     
-    /* Cursor nhấp nháy */
     .typing-cursor {
-        display: inline-block;
-        width: 3px;
-        height: 24px;
+        display: inline-block; width: 3px; height: 24px;
         background-color: var(--primary);
         animation: blink 0.8s infinite;
-        vertical-align: middle;
-        margin-left: 5px;
+        vertical-align: middle; margin-left: 5px;
         box-shadow: 0 0 8px var(--primary);
     }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
@@ -175,97 +166,96 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         box-shadow: 0 0 15px var(--primary-dim);
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
+        position: relative; overflow: hidden; z-index: 1;
     }
-    
     .btn-cta::after {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%;
+        content: ''; position: absolute; top: 0; left: -100%;
         width: 100%; height: 100%;
         background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-        transition: 0.5s;
-        z-index: -1;
+        transition: 0.5s; z-index: -1;
     }
-
-    .btn-cta:hover { 
-        transform: translateY(-3px); 
-        box-shadow: 0 0 25px var(--primary); 
-    }
+    .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 0 25px var(--primary); }
     .btn-cta:hover::after { left: 100%; }
 
+    /* AVATAR STYLE (Về như cũ nhưng đẹp hơn chút) */
     .hero-img-box {
         position: relative;
-        width: 380px; height: 380px;
+        width: 350px; height: 350px; /* Kích thước cũ */
     }
+    /* Glow phía sau */
     .hero-img-box::before {
-        content: ''; position: absolute; inset: -30px;
+        content: ''; position: absolute; inset: -20px;
         background: var(--gradient-glow);
-        border-radius: 50%; z-index: -1; filter: blur(30px);
+        border-radius: 20px; /* Bo góc nhẹ theo ảnh */
+        z-index: -1; filter: blur(30px);
     }
     .hero img {
-        width: 100%; height: 100%; object-fit: cover;
-        /* Hình lục giác bo tròn nhẹ */
-        clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
-        border: none;
-        filter: drop-shadow(0 0 15px var(--primary-dim));
+        width: 100%; height: 100%; 
+        object-fit: cover;
+        border-radius: 20px; /* Bo góc vuông nhẹ */
+        border: 2px solid rgba(102, 252, 241, 0.3); /* Viền mỏng tinh tế */
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
         transition: 0.5s;
+        /* KHÔNG CÓ clip-path hay animation morph */
     }
     .hero img:hover {
-        transform: scale(1.05) rotate(2deg);
-        filter: drop-shadow(0 0 25px var(--primary));
+        transform: scale(1.02); /* Zoom nhẹ khi hover */
+        border-color: var(--primary);
+        box-shadow: 0 0 30px var(--primary-dim);
     }
 
-    /* --- 4. SECTION TITLES (STYLE MỚI: NGANG & SLIDER GIỮA) --- */
+    /* --- 4. SECTION TITLES (NGANG & SLIDER DƯỚI CÙNG) --- */
     .section { padding: 100px 10%; position: relative; }
     
     .section-title {
         text-align: center;
         font-family: 'Space Grotesk', sans-serif;
-        font-size: 42px; /* Chữ to hơn */
+        font-size: 42px;
         margin-bottom: 70px;
         text-transform: uppercase;
         letter-spacing: 2px;
+        position: relative;
         
-        /* Flexbox để dàn ngang */
+        /* Flex column để slider nằm dưới chữ */
         display: flex;
-        align-items: center;
+        flex-direction: column; 
+        align-items: center; 
         justify-content: center;
-        gap: 20px; /* Khoảng cách giữa chữ và thanh slider */
-        flex-wrap: wrap; /* Xuống dòng nếu màn hình quá nhỏ */
     }
 
-    .section-title span {
-        transition: 0.4s ease;
+    /* Gom chữ thành 1 dòng ngang */
+    .title-text-group {
+        display: flex;
+        gap: 15px; /* Khoảng cách giữa các từ */
+        flex-wrap: wrap; /* Tự xuống dòng nếu màn hình quá bé */
+        justify-content: center;
     }
 
-    /* Thanh Slider Neon nằm giữa */
+    .section-title span { transition: 0.4s ease; }
+
+    /* Thanh Slider nằm dưới cùng, chính giữa */
     .title-line {
         height: 4px;
-        width: 60px; /* Chiều dài mặc định */
+        width: 80px; /* Chiều dài mặc định */
         background: var(--primary);
-        display: inline-block;
         border-radius: 2px;
         box-shadow: 0 0 15px var(--primary);
         transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        position: relative;
+        margin-top: 15px; /* Cách chữ một đoạn */
     }
 
-    /* Hiệu ứng Hover vào Tiêu đề */
+    /* Hover vào tiêu đề -> Thanh dài ra */
     .section-title:hover .title-line {
-        width: 120px; /* Kéo dài thanh ra */
-        background: #fff; /* Đổi màu sáng trắng */
-        box-shadow: 0 0 25px var(--primary), 0 0 50px var(--primary);
+        width: 150px; 
+        background: #fff;
+        box-shadow: 0 0 25px var(--primary);
     }
 
     .section-title:hover span {
         text-shadow: 0 0 15px var(--primary-dim);
-        letter-spacing: 3px; /* Chữ dãn ra nhẹ */
     }
 
-    /* --- 5. PROJECTS --- */
+    /* --- 5. PROJECTS (CARD HOVER) --- */
     .projects {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -281,16 +271,10 @@
         position: relative;
     }
 
-    /* Viền sáng chạy khi hover */
     .card::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        border-radius: 12px;
-        box-shadow: inset 0 0 0 0px var(--primary);
-        transition: 0.4s;
-        z-index: 2;
-        pointer-events: none;
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        border-radius: 12px; box-shadow: inset 0 0 0 0px var(--primary);
+        transition: 0.4s; z-index: 2; pointer-events: none;
     }
 
     .card:hover {
@@ -304,12 +288,9 @@
     }
 
     .card-img { width: 100%; height: 220px; overflow: hidden; position: relative; }
-    
-    /* Overlay màu khi chưa hover */
     .card-img::after {
         content: ''; position: absolute; inset: 0;
-        background: rgba(11, 12, 16, 0.3);
-        transition: 0.4s;
+        background: rgba(11, 12, 16, 0.3); transition: 0.4s;
     }
     .card:hover .card-img::after { background: transparent; }
 
@@ -336,35 +317,26 @@
     }
     .btn-link:hover { color: var(--primary); border-color: var(--primary); gap: 12px; }
 
-    /* --- 6. SKILLS (Glitch Effect) --- */
+    /* --- 6. SKILLS (GLITCH HOVER) --- */
     .skills-wrapper {
         display: flex; flex-wrap: wrap; justify-content: center; gap: 18px;
         max-width: 900px; margin: 0 auto;
     }
 
     .skill-tag {
-        padding: 14px 28px; 
-        background: #15171e; 
-        color: var(--text-muted);
-        border-radius: 6px; 
-        font-weight: 600; 
+        padding: 14px 28px; background: #15171e; color: var(--text-muted);
+        border-radius: 6px; font-weight: 600; 
         border: 1px solid rgba(255,255,255,0.05);
-        transition: 0.2s; 
-        display: flex; align-items: center; gap: 12px;
-        position: relative;
-        overflow: hidden;
+        transition: 0.2s; display: flex; align-items: center; gap: 12px;
+        position: relative; overflow: hidden;
     }
-
     .skill-tag i { color: var(--secondary); font-size: 18px; }
 
     .skill-tag:hover {
-        background: #0b0c10;
-        color: var(--primary);
-        border-color: var(--primary);
-        box-shadow: 0 0 15px var(--primary-dim);
+        background: #0b0c10; color: var(--primary);
+        border-color: var(--primary); box-shadow: 0 0 15px var(--primary-dim);
         transform: scale(1.05);
     }
-    
     .skill-tag:hover i { color: var(--primary); }
 
     /* --- 7. CONTACT & FOOTER --- */
@@ -389,7 +361,6 @@
         font-size: 14px; color: var(--text-muted); background: #050608; margin-top: 50px;
     }
 
-    /* --- 8. BACK TO TOP --- */
     #backToTop {
         position: fixed; bottom: 40px; right: 40px; width: 50px; height: 50px;
         background: transparent; color: var(--primary); border: 2px solid var(--primary);
@@ -401,19 +372,16 @@
     #backToTop.show { opacity: 1; visibility: visible; }
     #backToTop:hover { background: var(--primary); color: #000; box-shadow: 0 0 20px var(--primary); transform: translateY(-5px); }
 
-    /* --- 9. ANIMATIONS --- */
     .reveal { transform: translateY(50px); opacity: 0; transition: 0.8s ease-out; }
     .reveal.active { transform: translateY(0); opacity: 1; }
     
-    /* Mobile Responsive */
     @media (max-width: 768px) {
         .hero h1 { font-size: 38px; }
         .hero-img-box { width: 280px; height: 280px; margin-bottom: 40px; }
         header { padding: 15px 20px; }
         header nav { display: none; }
-        .section-title { font-size: 32px; flex-direction: column; gap: 15px; } /* Mobile thì cho xuống dòng cho đỡ chật */
-        .title-line { width: 40px; height: 3px; }
-        .section-title:hover .title-line { width: 80px; }
+        .section-title { font-size: 32px; }
+        .title-text-group { flex-direction: column; gap: 5px; } /* Mobile có thể xuống dòng nếu muốn */
     }
 </style>
 </head>
@@ -445,9 +413,11 @@
 
     <section class="section" id="projects">
         <div class="section-title reveal">
-            <span>Dự Án</span>
+            <div class="title-text-group">
+                <span>Dự Án</span>
+                <span class="highlight-text" style="color:var(--primary)">Tiêu Biểu</span>
+            </div>
             <div class="title-line"></div>
-            <span class="highlight-text">Tiêu Biểu</span>
         </div>
 
         <div class="projects reveal">
@@ -484,9 +454,11 @@
 
     <section class="section" id="skills">
         <div class="section-title reveal">
-            <span>Kỹ Năng</span>
+            <div class="title-text-group">
+                <span>Kỹ Năng</span>
+                <span class="highlight-text" style="color:var(--primary)">Chuyên Môn</span>
+            </div>
             <div class="title-line"></div>
-            <span class="highlight-text">Chuyên Môn</span>
         </div>
 
         <div class="skills-wrapper reveal">
@@ -503,9 +475,11 @@
 
     <section class="section" id="contact" style="padding-bottom: 80px;">
         <div class="section-title reveal">
-            <span>Liên Hệ</span>
+            <div class="title-text-group">
+                <span>Liên Hệ</span>
+                <span class="highlight-text" style="color:var(--primary)">Với Tôi</span>
+            </div>
             <div class="title-line"></div>
-            <span class="highlight-text">Với Tôi</span>
         </div>
 
         <div class="contact-container reveal">
@@ -537,7 +511,7 @@
     </button>
 
     <script>
-        // 1. Typing Effect (Fix lỗi xóa chữ)
+        // Typing Effect
         const textElement = document.getElementById('typing');
         const phrases = ["Game Developer", "IT Student", "Unity Coder"];
         let phraseIndex = 0; let charIndex = 0; let isDeleting = false;
@@ -549,21 +523,16 @@
             } else {
                 textElement.textContent = currentPhrase.substring(0, charIndex + 1); charIndex++;
             }
-            
             let typeSpeed = isDeleting ? 50 : 100;
-
             if (!isDeleting && charIndex === currentPhrase.length) {
-                isDeleting = true; typeSpeed = 2000; // Dừng lại 2s khi gõ xong
+                isDeleting = true; typeSpeed = 2000;
             } else if (isDeleting && charIndex === 0) {
-                isDeleting = false; 
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-                typeSpeed = 500;
+                isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; typeSpeed = 500;
             }
-
             setTimeout(type, typeSpeed);
         }
 
-        // 2. Scroll Reveal (Fix lỗi không hiện ban đầu)
+        // Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll('.reveal');
             for (var i = 0; i < reveals.length; i++) {
@@ -579,10 +548,10 @@
         window.addEventListener('scroll', reveal);
         document.addEventListener('DOMContentLoaded', () => {
             type();
-            reveal(); // Chạy ngay khi tải trang
+            reveal();
         });
 
-        // 3. Back To Top
+        // Back To Top
         const backToTopBtn = document.getElementById("backToTop");
         window.onscroll = function() {
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
